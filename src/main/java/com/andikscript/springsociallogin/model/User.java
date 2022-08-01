@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 public class User {
 
     @Id
-    @NotNull
     private String id;
 
     @NotNull
