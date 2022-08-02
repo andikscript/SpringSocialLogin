@@ -41,12 +41,6 @@ public class SecurityConfiguration {
         this.authEntryPointJwt = authEntryPointJwt;
     }
 
-//    @Bean
-//    public InMemoryUserDetailsManager userDetailsService() {
-//        return new InMemoryUserDetailsManager(user);
-////        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-//    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
