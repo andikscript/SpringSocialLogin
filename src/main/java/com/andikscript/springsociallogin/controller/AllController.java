@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/api/test/admin")
-public class AdminController {
+@RequestMapping(value = "/api/test/all")
+public class AllController {
 
     @GetMapping(value = "/access")
     public String adminAccess() {
-        return "admin access";
+        return "all access";
     }
 }
