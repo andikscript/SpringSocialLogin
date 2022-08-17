@@ -21,7 +21,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(
-        securedEnabled = true
+        securedEnabled = true,
+        jsr250Enabled = true
 )
 public class SecurityConfiguration {
 
@@ -68,6 +69,7 @@ public class SecurityConfiguration {
                 .antMatchers("/api/test/**").permitAll()
                 .antMatchers("/api/test/all/**").permitAll()
                 .antMatchers("/api/testsecured/**").permitAll()
+                .antMatchers("/api/roleallowed/**").permitAll()
                 .anyRequest().authenticated();
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
