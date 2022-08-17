@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -16,11 +17,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(
+        prePostEnabled = true
+)
 public class SecurityConfiguration {
 
     private final UserDetailsServiceImpl userDetailsServiceImpl;
@@ -63,10 +64,8 @@ public class SecurityConfiguration {
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/employee/**").permitAll()
-                .antMatchers("/api/test/public/**").permitAll()
-                .antMatchers("/api/test/user/**").hasAnyRole("USER", "ADMIN", "ROOT")
-                .antMatchers("/api/test/admin/**").hasAnyRole("ADMIN", "ROOT")
-                .antMatchers("/api/test/root/**").hasRole("ROOT")
+                .antMatchers("/api/test/**").permitAll()
+                .antMatchers("/api/test/all/**").permitAll()
                 .anyRequest().authenticated();
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
